@@ -72,8 +72,8 @@ This is a grammatical error correction reading list maintained by the HIT-LA Res
 - Ge Tao, Wei Furu, Zhou Ming. 2018. [Fluency Boost Learning and Inference for Neural Grammatical Error Correction](https://www.aclweb.org/anthology/P18-1097). In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers).
 - Bryant Christopher, Briscoe Ted. 2018. [Language Model Based Grammatical Error Correction without Annotated Training Data](https://www.aclweb.org/anthology/W18-0529). In Proceedings of the Thirteenth Workshop on Innovative Use of NLP for Building Educational Applications.
 - Rico Sennrich, Barry Haddow, and Alexandra Birch. 2016. [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf). In Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). Association for Computational Linguistics, Berlin, Germany, pages 1715–1725.(BPE)
-- Mina Naghshnejad1 , Tarun Joshi, and Vijayan N. Nair ,[Recent Trends in the Use of Deep Learning Models for Grammar Error Handling](https://arxiv.org/ftp/arxiv/papers/2009/2009.02358.pdf),2020
-- Vipul Raheja Dimitris Alikaniotis,2020[Adversarial Grammatical Error Correction](https://arxiv.org/pdf/2010.02407.pdf),EMNLP
+- Mina Naghshnejad1 , Tarun Joshi, and Vijayan N. Nair ,2020.[Recent Trends in the Use of Deep Learning Models for Grammar Error Handling](https://arxiv.org/ftp/arxiv/papers/2009/2009.02358.pdf).(review)
+- Vipul Raheja Dimitris Alikaniotis,2020[Adversarial Grammatical Error Correction](https://arxiv.org/pdf/2010.02407.pdf),EMNLP(DA)
 
 <h2 id="BEA">BEA 2019 Shared Task</h2>
 
@@ -95,6 +95,6 @@ This is a grammatical error correction reading list maintained by the HIT-LA Res
 - Abhijeet Awasthi, Sunita Sarawagi , Rasna Goyal , Sabyasachi Ghosh , Vihari Piratla. 2019. [Parallel Iterative Edit Models for Local Sequence Transduction](https://www.aclweb.org/anthology/D19-1435.pdf). In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing, pages 4260–4270, Hong Kong, China. Association for Computational Linguistics.
 - Kostiantyn Omelianchuk, Vitaliy Atrasevych, Artem Chernodub, Oleksandr Skurzhanskyi. 2020. [GECToR – Grammatical Error Correction: Tag, Not Rewrite](https://arxiv.org/pdf/2005.12592.pdf). in Proceedings of the 15th Workshop on Innovative Use of NLP for Building Educational Applications, pages 163–170
   . Association for Computational Linguistics.
-- Vipul Raheja Dimitris Alikaniotis,2020 [SequenceTransductionUsingSpan-levelEditOperations](https://arxiv.org/pdf/2009.11136.pdf),EMNLP,Google Research,2020
-- Mengyun Chen,Tao Ge,Xingxing Zhang,Furu Wei,Ming Zhou,2020[Improving the Efficiency of Grammatical Error Correction with Erroneous Span Detection and Correction](https://arxiv.org/pdf/2010.03260.pdf),EMNLP(span)
+- Vipul Raheja Dimitris Alikaniotis,2020.[Seq2Edits: Sequence Transduction Using Span-level Edit Operations](https://arxiv.org/pdf/2009.11136.pdf),EMNLP,Google Research,2020
+- Mengyun Chen,Tao Ge,Xingxing Zhang,Furu Wei,Ming Zhou,2020.[Improving the Efficiency of Grammatical Error Correction with Erroneous Span Detection and Correction](https://arxiv.org/pdf/2010.03260.pdf),EMNLP(span)
 - 
