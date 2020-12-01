@@ -1,6 +1,6 @@
 # GEC-Reading-List
 
-This is a grammatical error correction reading list maintained by the Beijing Language and Culture University Intelligent Computer-Assisted Language Learning (ICALL) Research Group.
+This is a grammatical error correction reading list maintained by the HIT-LA Research Group.
 
 ------
 
