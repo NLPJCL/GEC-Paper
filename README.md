@@ -1,98 +1,27 @@
-# GEC-Reading-List
+# 章岳——GEC论文
 
-This is a grammatical error correction reading list maintained by the HIT-LA Research Group.
+## A Comprehensive Survey of Grammar Error Correction
 
-------
++ 链接：[ A Comprehensive Survey of Grammar Error Correction (arxiv.org)](https://arxiv.org/abs/2005.06600)
 
-| Content                        |
-| ------------------------------ |
-| 1. [Shared Task](#1)           |
-| 2. [Dataset](#2)               |
-| 3. [Evaluation](#evaluation)   |
-| 4. [SMT & NMT](#SMT)             |
-| 5. [NMT](#NMT)                 |
-| 6. [Language Model](#Pretrain) |
-| 7. [Others(DA & MT)](#OTHER) |
-| 8. [BEA 2019 Shared Task](#BEA)             |
-| 9. [Non Autoregressive Model](#NAM)             |
++ 简介：本文是南开大学几位本科生所撰写的GEC领域截止到2020年5月份的工作综述。本文主要从数据集、公开任务、标注细节、常用模型、常用性能提升方法、常用评测指标和数据增强方法等方面对GEC进行介绍。总体来说，描述得还算比较详细，涵盖了几乎所有GEC相关论文，但存在着一些公式等方面的错误。
 
-<h2 id="shared_task"> Shared Task </h2>
+## Parallel Iterative Edit Models for Local Sequence Transduction
 
-- Dale Robert and Kilgarriff Adam. 2011. [Helping our own: The HOO 2011 pilot shared task](https://dl.acm.org/citation.cfm?id=2187725). In Proceedings of the 13th European Workshop on Natural Language Generation.
-- Dale Robert, Anisimoff Ilya and Narroway George. 2012. [HOO 2012: A Report on the Preposition and Determiner Error Correction Shared Task](https://dl.acm.org/citation.cfm?id=2390390). In Proceedings of the Seventh Workshop on Building Educational Applications Using NLP.
-- Ng Hwee Tou,	Wu Siew Mei, Wu Yuanbin, Hadiwinoto Christian and Tetreault  Joel. 2013. [The CoNLL-2013 Shared Task on Grammatical Error Correction](https://www.aclweb.org/anthology/W13-3601). In Proceedings of the Seventeenth Conference on Computational Natural Language Learning: Shared Task.
-- Ng Hwee Tou, Wu Siew Mei, Briscoe Ted, Hadiwinoto Christian, Susanto Raymond Hendy and Bryant Christopher. 2014. [The CoNLL-2014 Shared Task on Grammatical Error Correction](https://www.aclweb.org/anthology/W14-1701). In Proceedings of the Eighteenth Conference on Computational Natural Language Learning: Shared Task.
-- Christopher Bryant, Mariano Felice, Øistein Andersen and Ted Briscoe. 2019. [Building Educational Applications 2019 Shared Task:Grammatical Error Correction](https://www.aclweb.org/anthology/W19-4406).
++ 链接：[Parallel Iterative Edit Models for Local Sequence Transduction](https://www.aclweb.org/anthology/D19-1435.pdf)
 
-<h2 id="dataset"> Dataset </h2>
++ 简介：本文提出了一种并行迭代编辑模型，用于解决局部序列转化类型的问题。局部序列转化问题，指的是目标序列与源序列仅在有限的几个位置有差异，常见的有：语法纠错、拼写纠正、OCR错误识别等。以GEC任务为例，当下的SoTA模型大都采用Seq2Seq的Encoder-Decoder架构神经机器翻译模型，但是存在着：1）自回归解码速度慢；2）需要大量训练数据；3）只有纠正结果，没有具体的错误类型等缺陷。作者在本文中首次提出了一种Seq2Edits的并行预测模型，将语法纠错任务看作是一种序列标注任务，使用Softmax分类器在源文本每个Token处预测一个编辑操作。同时，为了考虑各编辑操作之间的影响，使用了迭代纠正的方法。此外，作者还提出了几个对于模型结构的创新，使其更适合GEC任务。最终结果表明，本文提出的PIE模型的$F_{0.5}$指标和当前最佳的Seq2Seq模型类似，但是预测速度提升了5-15倍。
++ 解读博客：https://caoyang.blog.csdn.net/article/details/103674256
 
-- Mizumoto Tomoya, Komachi Mamoru, Nagata Masaaki and Matsumoto Yuji. 2011. [Mining revision log of language learning SNS for automated Japanese error correction of second language learners](https://www.aclweb.org/anthology/I11-1017). In Proceedings of 5th International Joint Conference on Natural Language Processing. (lang-8)
-- Dahlmeier Daniel, Ng Hwee Tou and Wu Siew Mei. 2013. [Building a large annotated corpus of learner English: The NUS corpus of learner English](https://www.aclweb.org/anthology/W13-1703). In Proceedings of the eighth workshop on innovative use of NLP for building educational applications. (NUCLE)
-- Napoles Courtney, Sakaguchi Keisuke and Tetreault Joel. 2017. [JFLEG: A fluency corpus and benchmark for grammatical error correction](https://arxiv.org/pdf/1702.04066.pdf). (JFLEG)
-- Yannakoudakis Helen, Briscoe Ted and Medlock Ben. 2011. [A new dataset and method for automatically grading ESOL texts](https://dl.acm.org/citation.cfm?id=2002496).  In Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies. (FCE)
-- Yannakoudakis Helen, Andersen Øistein E, Geranpayeh Ardeshir, Briscoe Ted and Nicholls Diane. 2018. [Developing an automated writing placement system for ESL learners](https://www.tandfonline.com/doi/abs/10.1080/08957347.2018.1464447). Applied Measurement in Education. (W&I)
-- Sylviane Granger. 1998. [The computer learner corpus: A versatile new source of data for SLA research](https://www.researchgate.net/profile/Sylviane_Granger/publication/237128463_The_computer_learner_corpus_A_versatile_new_source_of_data_for_SLA_research/links/0c96051dc1c596def1000000/The-computer-learner-corpus-A-versatile-new-source-of-data-for-SLA-research.pdf). Learner English on Computer. (LOCNESS)
+## GECToR -- Grammatical Error Correction: Tag, Not Rewrite
 
-<h2 id="evaluation"> Evaluation </h2>
++ 链接：[GECToR -- Grammatical Error Correction: Tag, Not Rewrite (arxiv.org)](https://arxiv.org/abs/2005.12592)
 
-- Dahlmeier Daniel and Ng Hwee Tou. 2012. [Better evaluation for grammatical error correction](https://dl.acm.org/citation.cfm?id=2382118). In Proceedings of the 2012 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies. (Maxmatch,M2)
-- Napoles Courtney, Sakaguchi Keisuke, Post Matt and Tetreault Joel. 2015. [Ground truth for grammatical error correction metrics](https://www.aclweb.org/anthology/P15-2097). In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 2: Short Papers).(GLEU)
-- Bryant Christopher, Felice Mariano, Briscoe Edward John. 2017. [Automatic annotation and evaluation of error types for grammatical error correction](https://www.aclweb.org/anthology/P17-1074). In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers).(ERRANT)
++ 简介：这篇文章基本来说是当前GEC领域的SoTA了。本文由世界上最大的语法纠错软件Grammarly的研究人员发表。我认为这篇文章的创新性不大，模型的基本结构与PIE模型几乎类似，主要区别在于：1）设计了29种定制的g-transformation操作（即单独拎出来进行纠正的单复数变换、时态变换等）；2）将Fine-tuning阶段细分为了两个阶段：第一阶段使用含有错误的平行语料训练，第二阶段使用高质量的、错误句子和正确句子混合的平行语料训练；3）更换了新的预训练模型。个人认为，性能提升的最主要原因是因为本文使用了更加先进的预训练模型，如XLNet、RoBERTa等，而前人只使用BERT等。
++ 解读博客：http://fancyerii.github.io/2020/06/15/gector
 
-<h2 id="SMT"> SMT & NMT </h2>
+## Seq2Edits: Sequence Transduction Using Span-level Edit Operations
 
-- Grundkiewicz Roman, Junczys-Dowmunt MarcinNear. 2018. [Human-Level Performance in Grammatical Error Correction with Hybrid Machine Translation](https://www.aclweb.org/anthology/N18-2046). In Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 2 (Short Papers).
-- Chollampatt Shamil, Ng Hwee Tou. 2017. [Connecting the Dots Towards Human-Level Grammatical Error Correction](https://www.aclweb.org/anthology/W17-5037). In Proceedings of the 12th Workshop on Innovative Use of NLP for Building Educational Applications.
-- Chollampatt Shamil, Hoang Duc Tam, Ng Hwee Tou. 2016. [Adapting Grammatical Error Correction Based on the Native Language of Writers with Neural Network Joint Models](https://www.aclweb.org/anthology/D16-1195). In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing.
++ 链接：[Seq2Edits: Sequence Transduction Using Span-level Edit Operations (arxiv.org)](https://arxiv.org/abs/2009.11136)
 
-<h2 id="NMT"> NMT </h2>
-
-- Zhao Wei, Wang Liang, Shen Kewei, Jia Ruoyu, Liu Jingming. 2019. [Improving Grammatical Error Correction via Pre-Training a Copy-Augmented Architecture with Unlabeled Data](https://arxiv.org/pdf/1903.00138.pdf).
-- Junczys-Dowmunt Marcin, Grundkiewicz Roman, Guha Shubha, Heafield Kenneth. 2018. [Approaching Neural Grammatical Error Correction as a Low-Resource Machine Translation Task](https://www.aclweb.org/anthology/N18-1055). In Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long Papers).
-- Chollampatt Shamil, Ng Hwee Tou. 2018. [Neural Quality Estimation of Grammatical Error Correction](https://www.aclweb.org/anthology/D18-1274). In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing.
-- Chollampatt Shamil, Ng Hwee Tou. 2018. [A Multilayer Convolutional Encoder-Decoder Neural Network for Grammatical Error Correction](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/17308/16137). In Thirty-Second AAAI Conference on Artificial Intelligence.
-- Kasewa Sudhanshu, Stenetorp Pontus, Riedel Sebastian. 2018. [Wronging a Right: Generating Better Errors to Improve Grammatical Error Detection](https://www.aclweb.org/anthology/D18-1541). In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing.
-- Jared Lichtarge, Christopher Alberti, Shankar Kumar, Noam Shazeer, Niki Parmar (Google AI). 2018. [Weakly Supervised Grammatical Error Correction using Iterative Decoding](https://arxiv.org/abs/1811.01710). Arxiv.
-- Adriane Boyd. 2018. [Using Wikipedia Edits in Low Resource Grammatical Error Correction](https://www.aclweb.org/anthology/W18-6111). In Proceedings ofthe 2018 EMNLP Workshop W-NUT: The 4th Workshop on Noisy User-generated Text, pages 79–84 Brussels.
-- Keisuke Sakaguchi, Matt Post, Benjamin Van Durme. 2017. [Grammatical Error Correction with Neural Reinforcement Learning](https://www.aclweb.org/anthology/I17-2062). In Proceedings of the Eighth International Joint Conference on Natural Language Processing (Volume 2: Short Papers).
-- Xie Ziang, Avati Anand, Arivazhagan Naveen, Jurafsky Dan, Ng Andrew Y. 2016. [Neural Language Correction with Character-Based Attention](https://arxiv.org/pdf/1603.09727.pdf). Arxiv.
-
-<h2 id="Pretrain"> Language Model </h2>
-
-- Pascal Vincent, Hugo Larochelle, Yoshua Bengio, and Pierre-Antoine Manzagol. 2008. [Corpora Generation for Grammatical Error Correction](http://delivery.acm.org/10.1145/1400000/1390294/p1096-vincent.pdf?ip=123.127.77.18&id=1390294&acc=ACTIVE%20SERVICE&key=BF85BBA5741FDC6E%2E3079BB709085A683%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1568555058_da2bb710b2c14749225dc84cdd8b2136). In Proceedings of the 25th international conference on Machine learning, pages 1096–1103. ACM.(DAE)
-- Kenneth Heafield. 2011. [KenLM: Faster and Smaller Language Model Queries](https://www.aclweb.org/anthology/W11-2123). In Proceedings of the Sixth Workshop on Statistical Machine Translation, WMT’11, pages 187–197, Stroudsburg, USA. Association for Computational Linguistics.(KenLM)
-- Masahiro Kaneko, Masato Mita, Shun Kiyono, Jun Suzuki, Kentaro Inui. 2020. [Encoder-Decoder Models Can Benefit from Pre-trained Masked Language Models in Grammatical Error Correction](https://arxiv.org/pdf/2005.00987.pdf). In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 4248–4254 July 5 - 10, 2020. c 2020 Association for Computational Linguistics.(BERT)
-- Fan Yin1, Quanyu Long2, Tao Meng3, and Kai-Wei Chang. 2020. [On the Robustness of Language Encoders against Grammatical Errors](https://arxiv.org/pdf/2005.05683.pdf). In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 3386–3403 July 5 - 10, 2020. c 2020 Association for Computational Linguistics.(BERT)
-- Satoru Katsumata，and Mamoru Komachi.2020. [Stronger Baselines for Grammatical Error Correction Using a Pretrained Encoder–Decoder Model](https://arxiv.org/pdf/2005.11849.pdf).In Proceedings of AACL-IJCNLP 2020 (BART,mBART)
-- Hongfei Wang, Michiki Kurosawa, Satoru Katsumata and Mamoru Komachi. 2020. [Chinese Grammatical Correction Using BERT-based Pre-trained Model](https://arxiv.org/pdf/2011.02093.pdf). In Proceedings of AACL-IJCNLP 2020.(BERT-Chinese)
-
-<h2 id="OTHER(DA & MT)"> Others(DA & MT) </h2>
-
-- Lichtarge Jared, Alberti Chris, Kumar Shankar, Shazeer Noam, Parmar Niki, Tong Simon. 2019. [Corpora Generation for Grammatical Error Correction](https://arxiv.org/pdf/1904.05780.pdf). Arxiv.
-- Ge Tao, Wei Furu, Zhou Ming. 2018. [Fluency Boost Learning and Inference for Neural Grammatical Error Correction](https://www.aclweb.org/anthology/P18-1097). In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers).
-- Bryant Christopher, Briscoe Ted. 2018. [Language Model Based Grammatical Error Correction without Annotated Training Data](https://www.aclweb.org/anthology/W18-0529). In Proceedings of the Thirteenth Workshop on Innovative Use of NLP for Building Educational Applications.
-- Rico Sennrich, Barry Haddow, and Alexandra Birch. 2016. [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf). In Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). Association for Computational Linguistics, Berlin, Germany, pages 1715–1725.(BPE)
-
-<h2 id="BEA">BEA 2019 Shared Task</h2>
-
-- Roman Grundkiewicz, Marcin Junczys-Dowmunt, and Kenneth Heafield. 2019. [Neural Grammatical Error Correction Systems with Unsupervised Pre-training on Synthetic Data](https://www.aclweb.org/anthology/W19-4427). In Proceedings of the 14th Workshop on Innovative Use of NLP for Building Educational Applications. Association for Computational Linguistics.（No. 1）
-- Yo Joong Choe, Jiyeon Ham, Kyubyong Park, and Yeoil Yoon. 2019. [A Neural Grammatical Error Correction System Built On Better Pre-training and Sequential Transfer Learning](https://arxiv.org/pdf/1907.01256.pdf).  In Proceedings of the
-  14th Workshop on Innovative Use of NLP for Building Educational Applications. Association for Computational Linguistics.（No. 2）
-- Ruobing Li, Chuan Wang, Yefei Zha, Yonghong Yu, Shiman Guo, Qiang Wang, Yang Liu, and Hui Lin. 2019. [The LAIX Systems in the BEA-2019 GEC Shared Task](https://www.aclweb.org/anthology/W19-4416). In Proceedings of the 14th Workshop on Innovative Use of NLP for Building Educational Applications. Association for Computational Linguistics.（No. 3）
-- Zheng Yuan, Felix Stahlberg, Marek Rei, Bill Byrne, and Helen Yannakoudakis. 2019. [Neural and FST-based approaches to grammatical error correction](https://www.aclweb.org/anthology/W19-4424).In Proceedings of the 14th Workshop on Innovative
-  Use of NLP for Building Educational Applications. Association for Computational Linguistics.（No. 4）
-- Hiroki Asano, Tomoya Mizumoto, and Masato Mita. 2019. [The AIP-Tohoku System at the BEA-2019 Shared Task](https://www.aclweb.org/anthology/W19-4418). In Proceedings of the 14th Workshop on Innovative Use of NLP for Building Educational Applications. Association for Computational Linguistics.（No. 9）
-- Jakub Naplava and Milan Straka. 2019. [CUNI System for the Building Educational Applications 2019
-  Shared Task: Grammatical Error Correction](https://www.aclweb.org/anthology/W19-4419).  In Proceedings of the 14th Workshop on Innovative Use of NLP for Building Educational Applications. Association for Computational Linguistics.（No. 10）
-- Liner Yang and Chencheng Wang. 2019. [The BLCU System in the BEA 2019 Shared Task](https://www.aclweb.org/anthology/W19-4421). In Proceedings of the 14th Workshop on Innovative Use of NLP for Building Educational Applications. Association for Computational Linguistics.（No. 12）
-- Yoav Kantor, Yoav Katz, Leshem Choshen, Edo Cohen-Karlik, Naftali Liberman, Assaf Toledo, Amir Menczel, and Noam Slonim. 2019. [Learning to combine Grammatical Error Corrections](https://arxiv.org/pdf/1906.03897.pdf).  In Proceedings of the 14th Workshop on Innovative Use of NLP for Building Educational Applications. Association for Computational Linguistics. （No. 13）
-- Masahiro Kaneko, Kengo Hotate, Satoru Katsumata, and Mamoru Komachi. 2019. [TMU Transformer System Using BERT for Re-ranking at BEA 2019 Grammatical Error Correction on Restricted Track](https://www.aclweb.org/anthology/W19-4422). In Proceedings of the 14th Workshop on Innovative Use of NLP for Building Educational Applications. Association for Computational Linguistics.（No. 14）
-
-<h2 id="NAM"> Non Autoregressive Model </h2>
-
-- Abhijeet Awasthi, Sunita Sarawagi , Rasna Goyal , Sabyasachi Ghosh , Vihari Piratla. 2019. [Parallel Iterative Edit Models for Local Sequence Transduction](https://www.aclweb.org/anthology/D19-1435.pdf). In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing, pages 4260–4270, Hong Kong, China. Association for Computational Linguistics.
-
-- Kostiantyn Omelianchuk, Vitaliy Atrasevych, Artem Chernodub, Oleksandr Skurzhanskyi. 2020. [GECToR – Grammatical Error Correction: Tag, Not Rewrite](https://arxiv.org/pdf/2005.12592.pdf). in Proceedings of the 15th Workshop on Innovative Use of NLP for Building Educational Applications, pages 163–170
-  . Association for Computational Linguistics.
-
-  
++ 简介：Seq2Edit的模型从2019年开始逐渐被人们用在局部序列转导任务上，例如：语法纠错、文本规范化等。但是，以往的Seq2Edit模型均为在Token级别预测并进行编辑操作，本文首次提出在Span级别预测并进行编辑。作者提出，在Span级别预测并进行编辑，能够利用更丰富的局部信息，更容易捕捉到Span内的依赖关系。作者为此提出了一个类多任务学习Transformer模型，自回归生成编辑序列$(t_n,p_n,r_n)$，其中：$t_n$表示当前编辑的标签Tag，$p_n$表示当前Span的结束位置Position，$r_n$表示用于替换从$p_{n-1}$到$p_n$的Span的字符串Replace。值得一提的是，作者在预测$p_n$时使用了Pointer NetWorks。由于生成编辑序列短于直接生成文本，所以本文模型比传统Text2Text的端到端GEC模型快2-5倍，同时，在多个LST任务上获得了SoTA效果。
