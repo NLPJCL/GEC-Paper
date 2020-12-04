@@ -17,7 +17,7 @@
 
 + 链接：[GECToR -- Grammatical Error Correction: Tag, Not Rewrite (arxiv.org)](https://arxiv.org/abs/2005.12592)
 
-+ 简介：这篇文章基本来说是当前GEC领域的SoTA了。本文由世界上最大的语法纠错软件Grammarly的研究人员发表。我认为这篇文章的创新性不大，模型的基本结构与PIE模型几乎类似，主要区别在于：1）设计了29种定制的g-transformation操作（即单独拎出来进行纠正的单复数变换、时态变换等）；2）将Fine-tuning阶段细分为了两个阶段：第一阶段使用含有错误的平行语料训练，第二阶段使用高质量的、错误句子和正确句子混合的平行语料训练；3）更换了新的预训练模型。个人认为，性能提升的最主要原因是因为本文使用了更加先进的预训练模型，如XLNet、RoBERTa等，而前人只使用BERT等。
++ 简介：这篇文章基本来说是当前英文GEC领域的SoTA了。本文由世界上最大的语法纠错软件Grammarly的研究人员发表。我认为这篇文章的创新性不大，模型的基本结构与PIE模型几乎类似，主要区别在于：1）设计了29种定制的g-transformation操作（即单独拎出来进行纠正的单复数变换、时态变换等）；2）将Fine-tuning阶段细分为了两个阶段：第一阶段使用含有错误的平行语料训练，第二阶段使用高质量的、错误句子和正确句子混合的平行语料训练；3）更换了新的预训练模型。个人认为，性能提升的最主要原因是因为本文使用了更加先进的预训练模型，如XLNet、RoBERTa等，而前人只使用BERT等。
 + 解读博客：http://fancyerii.github.io/2020/06/15/gector
 
 ## Seq2Edits: Sequence Transduction Using Span-level Edit Operations
@@ -25,3 +25,15 @@
 + 链接：[Seq2Edits: Sequence Transduction Using Span-level Edit Operations (arxiv.org)](https://arxiv.org/abs/2009.11136)
 
 + 简介：Seq2Edit的模型从2019年开始逐渐被人们用在局部序列转导任务上，例如：语法纠错、文本规范化等。但是，以往的Seq2Edit模型均为在Token级别预测并进行编辑操作，本文首次提出在Span级别预测并进行编辑。作者提出，在Span级别预测并进行编辑，能够利用更丰富的局部信息，更容易捕捉到Span内的依赖关系。作者为此提出了一个类多任务学习Transformer模型，自回归生成编辑序列$(t_n,p_n,r_n)$，其中：$t_n$表示当前编辑的标签Tag，$p_n$表示当前Span的结束位置Position，$r_n$表示用于替换从$p_{n-1}$到$p_n$的Span的字符串Replace。值得一提的是，作者在预测$p_n$时使用了Pointer NetWorks。由于生成编辑序列短于直接生成文本，所以本文模型比传统Text2Text的端到端GEC模型快2-5倍，同时，在多个LST任务上获得了SoTA效果。
+
+## Improving the Efficiency of Grammatical Error Correction with Erroneous Span Detection and Correction
+
++ 链接：[Improving the Efficiency of Grammatical Error Correction with Erroneous Span Detection and Correction (arxiv.org)](https://arxiv.org/abs/2010.03260)
++ 简介：传统的非自回归Seq2Edit的GEC模型虽然简单高效，但其性能非常依赖于手工定制的编辑操作，例如：时态变化、人称变换等，而这些编辑只在特定语言中奏效，从而导致这类模型（如PIE、GECToR等）难以迁移到其他语言上。针对这一问题，作者提出了一个两阶段模型来解决GEC任务：1）ESD错误范围检测模型，采用一个序列标注模型来探测哪些token需要被纠正；2）ESC错误范围纠正模型，采用一个传统的Seq2Seq模型来对错误范围进行序列生成纠正。由于本文模型并不是Full-Sequence生成，所以解码速度相较于传统的Seq2Seq模型快2倍，并且可以方便地迁移到中文等语言上。
+
+## MaskGEC: Improving Neural Grammatical Error Correction via Dynamic Masking
+
++ 链接：[MaskGEC: Improving Neural Grammatical Error Correction via Dynamic Masking | Proceedings of the AAAI Conference on Artificial Intelligence](https://ojs.aaai.org//index.php/AAAI/article/view/5476)
+
++ 简介：基于神经机器翻译的Seq2Seq的GEC模型近年来成为了GEC任务的主流。但深度的神经网络拥有着数量巨大的参数，这需要大量平行语料才能很好地训练。而在中文GEC任务中，真实的平行语料难以标注获得，作者提出了一种数据增强方法——动态掩蔽。通过在每一轮训练前，将原纠错句子对中的源序列里的token以某个概率替换为词表中的其它词或者$<pad>$标记，可以获得新的句子对，从而能够增强模型的泛化能力。作者提出了5种噪音生成方案对源序列进行动态掩蔽，其中混合噪音效果最好。在NLPCC-2018中文GEC数据集上，作者提出的模型（Char-Transormer+混合噪音动态掩蔽）达到了目前的SoTA。作者提出的数据增强方案与模型无关，可以应用在Seq2Seq或Seq2Edit的任意模型上。值得一提的是，作者实验表明：在中文上应用BPE算法效果不如直接用Char效果好（作者分析原因：1）用字作为切分单元后，词表大小对GEC任务更友好；2）BPE算法需要分词，而分词错误可能导致性能下降）。
+
