@@ -12,7 +12,7 @@ This is a grammatical error correction reading list maintained by the HIT-LA Res
 | 4. [SMT & NMT](#SMT)                 |
 | 5. [NMT](#NMT)                       |
 | 6. [Language Model](#Pretrain)       |
-| 7. [Others(DA & MT)](#DA & MT)       |
+| 7. [DA & MT](#DA & MT)               |
 | 8. [BEA 2019 Shared Task](#BEA)      |
 | 9. [Non Autoregressive Model](#NAM)  |
 | 10.[Spelling Error Correction](#SEC) |
@@ -91,7 +91,7 @@ This is a grammatical error correction reading list maintained by the HIT-LA Res
   
   原因。这里用到了pointer network。没有深入了解，以后可以仔细看看。实验结果一般。
 
-<h2 id="SER"> Spelling Error Correction </h2>
+<h2 id="SEC"> Spelling Error Correction </h2>
 
 - Zuyi Bao, Chen Li and Rui Wang.2020.[Chunk-based Chinese Spelling Check with Global Optimization](https://www.aclweb.org/anthology/2020.findings-emnlp.184.pdf),EMNLP-Findings.
 - Shaohua Zhang1 , Haoran Huang1 , Jicong Liu2 and Hang Li1.2020.[Spelling Error Correction with Soft-Masked BERT](https://www.aclweb.org/anthology/2020.acl-main.82.pdf).ACL.
