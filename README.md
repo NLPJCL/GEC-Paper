@@ -12,7 +12,7 @@ This is a grammatical error correction reading list maintained by the HIT-LA Res
 | 4. [SMT & NMT](#SMT)                 |
 | 5. [NMT](#NMT)                       |
 | 6. [Language Model](#Pretrain)       |
-| 7. [DA & MT](#DA & MT)               |
+| 7. [DA & MT](#DM)                    |
 | 8. [BEA 2019 Shared Task](#BEA)      |
 | 9. [Non Autoregressive Model](#NAM)  |
 | 10.[Spelling Error Correction](#SEC) |
@@ -65,7 +65,7 @@ This is a grammatical error correction reading list maintained by the HIT-LA Res
 
   概述：微软亚洲研究院的 Ge Tao发表在2020EMNLP的作者，Ge Tao也是2018年ACL流畅度提升的作者，近几年一直钻研这个方向。本篇文章主要的动机是：序列到序列模型生成全部文本对于原序列与目标序列有很多重复序列的任务太浪费时间。所以提出了一种与语言无关的方法提高效率：把纠正任务分成两个阶段，ESD(错误的span检查)和ESC（错误的span纠正），其实ESC阶段只做上一阶段检查出来错误的span的纠正。ESD（错误的span检查）：当作一个序列标注任务(2分类问题)，每个token分类的类别是0或1，错误的token会输出1，正确的token会输出0.如果连续输出几个1，那么就认为这几个token就是一个错误的span。ESC（错误的span纠正）：输入是源句子并对错误的span替换为<s1> span </s1>，输出是仅仅生成错误span的纠正。因为还是用序列到序列的模型来纠正，因此是语言独立的。而作者提到，PIE和Gector因为涉及很多英语独有的词性变化，因此很难迁移到其他语言。（不一定对，可以针对汉语指定特殊的编辑操作. PIE论文做过消融实验，在英语中少了transformations，找回来下降了6.3，$F_{0.5}$下降了5.7）
 
-<h2 id="(DA & MT)"> Others(DA & MT) </h2>
+<h2 id="DM"> Others(DA & MT) </h2>
 
 - Lichtarge Jared, Alberti Chris, Kumar Shankar, Shazeer Noam, Parmar Niki, Tong Simon. 2019. [Corpora Generation for Grammatical Error Correction](https://arxiv.org/pdf/1904.05780.pdf). Arxiv.
 - Ge Tao, Wei Furu, Zhou Ming. 2018. [Fluency Boost Learning and Inference for Neural Grammatical Error Correction](https://www.aclweb.org/anthology/P18-1097). In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers).
